@@ -1,0 +1,2 @@
+/eos/user/g/gcorreia/CRAB_HOTVR/QCD_PT-1400to1800_TuneCP5_13p6TeV_pythia8/crab_20250410_021549/250410_001558/0000/tree_1.root
+/eos/user/g/gcorreia/CRAB_HOTVR/QCD_PT-1400to1800_TuneCP5_13p6TeV_pythia8/crab_20250410_021549/250410_001558/0000/tree_2.root
