@@ -158,6 +158,125 @@ bool HEPHero::Init() {
         _inputTree->SetBranchAddress("jet_pfcandidate_photon_r9", &jet_pfcand_photon_r9);
         
 
+        _inputTree->SetBranchAddress("jetAK8_pt", &jetAK8_pt);
+        _inputTree->SetBranchAddress("jetAK8_eta", &jetAK8_eta);
+        _inputTree->SetBranchAddress("jetAK8_phi", &jetAK8_phi);
+        _inputTree->SetBranchAddress("jetAK8_mass", &jetAK8_mass);
+        //_inputTree->SetBranchAddress("jetAK8_pt_raw", &jetAK8_pt_raw);
+        //_inputTree->SetBranchAddress("jetAK8_mass_raw", &jetAK8_mass_raw);
+        //_inputTree->SetBranchAddress("jetAK8_chf", &jetAK8_chf);
+        //_inputTree->SetBranchAddress("jetAK8_nhf", &jetAK8_nhf);
+        //_inputTree->SetBranchAddress("jetAK8_elf", &jetAK8_elf);
+        //_inputTree->SetBranchAddress("jetAK8_phf", &jetAK8_phf);
+        //_inputTree->SetBranchAddress("jetAK8_muf", &jetAK8_muf);
+        //_inputTree->SetBranchAddress("jetAK8_id", &jetAK8_id);
+        //_inputTree->SetBranchAddress("jetAK8_ncand", &jetAK8_ncand);
+        //_inputTree->SetBranchAddress("jetAK8_nch", &jetAK8_nch);
+        //_inputTree->SetBranchAddress("jetAK8_nnh", &jetAK8_nnh);
+        //_inputTree->SetBranchAddress("jetAK8_nel", &jetAK8_nel);
+        //_inputTree->SetBranchAddress("jetAK8_nph", &jetAK8_nph);
+        //_inputTree->SetBranchAddress("jetAK8_nmu", &jetAK8_nmu);
+        //_inputTree->SetBranchAddress("jetAK8_hflav", &jetAK8_hflav);
+        //_inputTree->SetBranchAddress("jetAK8_pflav", &jetAK8_pflav);
+        //_inputTree->SetBranchAddress("jetAK8_nbhad", &jetAK8_nbhad);
+        //_inputTree->SetBranchAddress("jetAK8_nchad", &jetAK8_nchad);
+        //_inputTree->SetBranchAddress("jetAK8_nsubjets", &jetAK8_nsubjets);
+
+        _inputTree->SetBranchAddress("jetAK8_softdrop_pt", &jetAK8_softdrop_pt);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_pt_raw", &jetAK8_softdrop_pt_raw);
+        _inputTree->SetBranchAddress("jetAK8_softdrop_eta", &jetAK8_softdrop_eta);
+        _inputTree->SetBranchAddress("jetAK8_softdrop_phi", &jetAK8_softdrop_phi);
+        _inputTree->SetBranchAddress("jetAK8_softdrop_mass", &jetAK8_softdrop_mass);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_mass_raw", &jetAK8_softdrop_mass_raw);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_subjet_pt", &jetAK8_softdrop_subjet_pt);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_subjet_pt_raw", &jetAK8_softdrop_subjet_pt_raw);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_subjet_eta", &jetAK8_softdrop_subjet_eta);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_subjet_phi", &jetAK8_softdrop_subjet_phi);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_subjet_mass", &jetAK8_softdrop_subjet_mass);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_subjet_mass_raw", &jetAK8_softdrop_subjet_mass_raw);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_subjet_ijet", &jetAK8_softdrop_subjet_ijet);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_subjet_nbhad", &jetAK8_softdrop_subjet_nbhad);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_subjet_nchad", &jetAK8_softdrop_subjet_nchad);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_subjet_hflav", &jetAK8_softdrop_subjet_hflav);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_subjet_pflav", &jetAK8_softdrop_subjet_pflav);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_genmatch_pt", &jetAK8_softdrop_genmatch_pt);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_genmatch_eta", &jetAK8_softdrop_genmatch_eta);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_genmatch_phi", &jetAK8_softdrop_genmatch_phi);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_genmatch_mass", &jetAK8_softdrop_genmatch_mass);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_subjet_genmatch_pt", &jetAK8_softdrop_subjet_genmatch_pt);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_subjet_genmatch_eta", &jetAK8_softdrop_subjet_genmatch_eta);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_subjet_genmatch_phi", &jetAK8_softdrop_subjet_genmatch_phi);
+        //_inputTree->SetBranchAddress("jetAK8_softdrop_subjet_genmatch_mass", &jetAK8_softdrop_subjet_genmatch_mass);
+
+        _inputTree->SetBranchAddress("jetAK8_sv_pt", &jetAK8_sv_pt);
+        _inputTree->SetBranchAddress("jetAK8_sv_eta", &jetAK8_sv_eta);
+        _inputTree->SetBranchAddress("jetAK8_sv_phi", &jetAK8_sv_phi);
+        _inputTree->SetBranchAddress("jetAK8_sv_mass", &jetAK8_sv_mass);
+        _inputTree->SetBranchAddress("jetAK8_sv_energy", &jetAK8_sv_energy);
+        _inputTree->SetBranchAddress("jetAK8_sv_chi2", &jetAK8_sv_chi2);
+        _inputTree->SetBranchAddress("jetAK8_sv_dxy", &jetAK8_sv_dxy);
+        _inputTree->SetBranchAddress("jetAK8_sv_dxysig", &jetAK8_sv_dxysig);
+        _inputTree->SetBranchAddress("jetAK8_sv_d3d", &jetAK8_sv_d3d);
+        _inputTree->SetBranchAddress("jetAK8_sv_d3dsig", &jetAK8_sv_d3dsig);
+        _inputTree->SetBranchAddress("jetAK8_sv_ntrack", &jetAK8_sv_ntrack);
+        _inputTree->SetBranchAddress("jetAK8_sv_ijet", &jetAK8_sv_ijet);
+
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_pt", &jetAK8_pfcand_pt);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_eta", &jetAK8_pfcand_eta);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_phi", &jetAK8_pfcand_phi);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_mass", &jetAK8_pfcand_mass);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_energy", &jetAK8_pfcand_energy);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_calofraction", &jetAK8_pfcand_calofraction);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_hcalfraction", &jetAK8_pfcand_hcalfraction);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_dz", &jetAK8_pfcand_dz);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_dzsig", &jetAK8_pfcand_dzsig);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_dxy", &jetAK8_pfcand_dxy);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_dxysig", &jetAK8_pfcand_dxysig);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_puppiw", &jetAK8_pfcand_puppiw);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_frompv", &jetAK8_pfcand_frompv);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_id", &jetAK8_pfcand_id);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_charge", &jetAK8_pfcand_charge);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_ijet", &jetAK8_pfcand_ijet);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_candjet_pperp_ratio", &jetAK8_pfcand_pperp_ratio);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_candjet_ppara_ratio", &jetAK8_pfcand_ppara_ratio);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_candjet_deta", &jetAK8_pfcand_deta);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_candjet_dphi", &jetAK8_pfcand_dphi);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_candjet_etarel", &jetAK8_pfcand_etarel);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_track_chi2", &jetAK8_pfcand_track_chi2);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_track_qual", &jetAK8_pfcand_track_qual);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_track_pterr", &jetAK8_pfcand_track_pterr);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_track_etaerr", &jetAK8_pfcand_track_etaerr);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_track_phierr", &jetAK8_pfcand_track_phierr);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_track_algo", &jetAK8_pfcand_track_algo);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_trackjet_d3d", &jetAK8_pfcand_trackjet_d3d);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_trackjet_d3dsig", &jetAK8_pfcand_trackjet_d3dsig);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_trackjet_dist", &jetAK8_pfcand_trackjet_dist);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_trackjet_decayL", &jetAK8_pfcand_trackjet_decayL);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_nhits", &jetAK8_pfcand_nhits);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_npixhits", &jetAK8_pfcand_npixhits);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_nstriphits", &jetAK8_pfcand_nstriphits);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_nlosthits", &jetAK8_pfcand_nlosthits);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_npixlayers", &jetAK8_pfcand_npixlayers);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_nstriplayers", &jetAK8_pfcand_nstriplayers);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_tau_signal", &jetAK8_pfcand_tau_signal);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_tau_boosted_signal", &jetAK8_pfcand_tau_boosted_signal);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_muon_id", &jetAK8_pfcand_muon_id);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_muon_isglobal", &jetAK8_pfcand_muon_isglobal);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_muon_chi2", &jetAK8_pfcand_muon_chi2);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_muon_nvalidhit", &jetAK8_pfcand_muon_nvalidhit);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_muon_nstation", &jetAK8_pfcand_muon_nstation);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_muon_segcomp", &jetAK8_pfcand_muon_segcomp);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_electron_eOverP", &jetAK8_pfcand_electron_eOverP);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_electron_detaIn", &jetAK8_pfcand_electron_detaIn);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_electron_dphiIn", &jetAK8_pfcand_electron_dphiIn);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_electron_r9", &jetAK8_pfcand_electron_r9);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_electron_sigIetaIeta", &jetAK8_pfcand_electron_sigIetaIeta);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_electron_sigIphiIphi", &jetAK8_pfcand_electron_sigIphiIphi);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_electron_convProb", &jetAK8_pfcand_electron_convProb);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_photon_sigIetaIeta", &jetAK8_pfcand_photon_sigIetaIeta);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_photon_eVeto", &jetAK8_pfcand_photon_eVeto);
+        _inputTree->SetBranchAddress("jetAK8_pfcandidate_photon_r9", &jetAK8_pfcand_photon_r9);
+
         
         //-----------------------------------------------------------------------------------------------------------------------
         if( dataset_group != "Data" ) {
@@ -180,14 +299,16 @@ bool HEPHero::Init() {
             _inputTree->SetBranchAddress("gen_particle_daughters_status", &gen_particle_daughters_status);
             _inputTree->SetBranchAddress("gen_particle_daughters_charge", &gen_particle_daughters_charge);
 
-            //_inputTree->SetBranchAddress("jet_genmatch_pt", &jet_genmatch_pt);
-            //_inputTree->SetBranchAddress("jet_genmatch_eta", &jet_genmatch_eta);
-            //_inputTree->SetBranchAddress("jet_genmatch_phi", &jet_genmatch_phi);
-            //_inputTree->SetBranchAddress("jet_genmatch_mass", &jet_genmatch_mass);
-            _inputTree->SetBranchAddress("jet_genmatch_wnu_pt", &jet_genmatch_wnu_pt);
-            _inputTree->SetBranchAddress("jet_genmatch_wnu_eta", &jet_genmatch_wnu_eta);
-            _inputTree->SetBranchAddress("jet_genmatch_wnu_phi", &jet_genmatch_wnu_phi);
-            _inputTree->SetBranchAddress("jet_genmatch_wnu_mass", &jet_genmatch_wnu_mass);
+            _inputTree->SetBranchAddress("jet_genmatch_pt", &jet_genmatch_pt);
+            _inputTree->SetBranchAddress("jet_genmatch_eta", &jet_genmatch_eta);
+            _inputTree->SetBranchAddress("jet_genmatch_phi", &jet_genmatch_phi);
+            _inputTree->SetBranchAddress("jet_genmatch_mass", &jet_genmatch_mass);
+
+            _inputTree->SetBranchAddress("jetAK8_genmatch_pt", &jetAK8_genmatch_pt);
+            _inputTree->SetBranchAddress("jetAK8_genmatch_eta", &jetAK8_genmatch_eta);
+            _inputTree->SetBranchAddress("jetAK8_genmatch_phi", &jetAK8_genmatch_phi);
+            _inputTree->SetBranchAddress("jetAK8_genmatch_mass", &jetAK8_genmatch_mass);
+       
             
 
         }

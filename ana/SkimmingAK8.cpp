@@ -399,11 +399,8 @@ void HEPHero::SkimmingSelection() {
 
       float dRCone;
       float dRMatchingDaughterJet;
-      float R_HOTVR = 600/jet_pt->at(ijet);
-      if( R_HOTVR > 1.5 ) R_HOTVR = 1.5;
-      if( R_HOTVR < 0.1 ) R_HOTVR = 0.1;
-      dRCone = R_HOTVR;
-      dRMatchingDaughterJet = R_HOTVR;
+      dRCone = 0.8;
+      dRMatchingDaughterJet = 0.8;
       
       Skimming::R_ref = dRCone;
 
