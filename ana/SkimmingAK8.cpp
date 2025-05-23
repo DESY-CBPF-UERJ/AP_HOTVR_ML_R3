@@ -395,7 +395,7 @@ void HEPHero::SkimmingSelection() {
 
     //--------------------------------------------------------------------
     /// Loop over the main jet collection
-    for(size_t ijet = 0; ijet < jet_pt->size(); ijet++){
+    for(size_t ijet = 0; ijet < jetAK8_pt->size(); ijet++){
 
       float dRCone;
       float dRMatchingDaughterJet;
@@ -407,11 +407,11 @@ void HEPHero::SkimmingSelection() {
       _cutFlow.at("00_Total") += 1;
 
       // Base Selection
-      if(jet_pt->at(ijet) < jetPtMin or jet_pt->at(ijet) > jetPtMax or fabs(jet_eta->at(ijet)) > jetEtaMax or fabs(jet_eta->at(ijet)) < jetEtaMin) continue;
+      if(jetAK8_pt->at(ijet) < jetPtMin or jetAK8_pt->at(ijet) > jetPtMax or fabs(jetAK8_eta->at(ijet)) > jetEtaMax or fabs(jetAK8_eta->at(ijet)) < jetEtaMin) continue;
       _cutFlow.at("01_PassBaseCuts") += 1;
 
       TLorentzVector jet4V;
-      jet4V.SetPtEtaPhiM(jet_pt->at(ijet),jet_eta->at(ijet),jet_phi->at(ijet),jet_mass->at(ijet));
+      jet4V.SetPtEtaPhiM(jetAK8_pt->at(ijet),jetAK8_eta->at(ijet),jetAK8_phi->at(ijet),jetAK8_mass->at(ijet));
 
       // Matching with the resonance for signal jets using the kinematics
       int match_index_dR_res_jet = -1;
@@ -472,7 +472,7 @@ void HEPHero::SkimmingSelection() {
         _cutFlow.at("02_SignalResCuts") += 1;
       }
 
-      //if( jet_id->at(ijet) == 0 ) continue;
+      //if( jetAK8_id->at(ijet) == 0 ) continue;
       //_cutFlow.at("03_HasJetLooseId") += 1;
 
 
@@ -486,10 +486,10 @@ void HEPHero::SkimmingSelection() {
       }
       else{
         // take the gen soft drop in QCD jets or un-matched jets, no need for the neutrino correction, everything fixed to be soft-drop
-        Skimming::jet_pt_truth_b   = jet_genmatch_wnu_pt->at(ijet);
-        Skimming::jet_eta_truth_b  = jet_genmatch_wnu_eta->at(ijet);
-        Skimming::jet_phi_truth_b  = jet_genmatch_wnu_phi->at(ijet);
-        Skimming::jet_mass_truth_b = jet_genmatch_wnu_mass->at(ijet);
+        Skimming::jet_pt_truth_b   = jetAK8_genmatch_wnu_pt->at(ijet);
+        Skimming::jet_eta_truth_b  = jetAK8_genmatch_wnu_eta->at(ijet);
+        Skimming::jet_phi_truth_b  = jetAK8_genmatch_wnu_phi->at(ijet);
+        Skimming::jet_mass_truth_b = jetAK8_genmatch_wnu_mass->at(ijet);
       }
 
 
@@ -510,16 +510,16 @@ void HEPHero::SkimmingSelection() {
       Skimming::met_b = met;
 
       // fill jet branches
-      Skimming::jet_pt_b = jet_pt->at(ijet);
-      Skimming::jet_eta_b = jet_eta->at(ijet);
-      Skimming::jet_phi_b = jet_phi->at(ijet);
-      Skimming::jet_mass_b = jet_mass->at(ijet);
+      Skimming::jet_pt_b = jetAK8_pt->at(ijet);
+      Skimming::jet_eta_b = jetAK8_eta->at(ijet);
+      Skimming::jet_phi_b = jetAK8_phi->at(ijet);
+      Skimming::jet_mass_b = jetAK8_mass->at(ijet);
 
       // soft drop
-      //Skimming::jet_softdrop_pt_b = jet_softdrop_pt->at(ijet);
-      //Skimming::jet_softdrop_eta_b = jet_softdrop_eta->at(ijet);
-      //Skimming::jet_softdrop_phi_b = jet_softdrop_phi->at(ijet);
-      Skimming::jet_softdrop_mass_b = jet_softdrop_mass->at(ijet);
+      //Skimming::jet_softdrop_pt_b = jetAK8_softdrop_pt->at(ijet);
+      //Skimming::jet_softdrop_eta_b = jetAK8_softdrop_eta->at(ijet);
+      //Skimming::jet_softdrop_phi_b = jetAK8_softdrop_phi->at(ijet);
+      Skimming::jet_softdrop_mass_b = jetAK8_softdrop_mass->at(ijet);
 
 
       // SV
@@ -529,26 +529,26 @@ void HEPHero::SkimmingSelection() {
       Skimming::jet_sv_d3d_b.clear(); Skimming::jet_sv_d3dsig_b.clear(); Skimming::jet_sv_ntrack_b.clear();
       Skimming::jet_sv_pt_log_b.clear(); Skimming::jet_sv_energy_log_b.clear();
 
-      for(size_t isv = 0; isv < jet_sv_pt->size(); isv++){
+      for(size_t isv = 0; isv < jetAK8_sv_pt->size(); isv++){
 
-        if(ijet != jet_sv_ijet->at(isv)) continue;
+        if(ijet != jetAK8_sv_ijet->at(isv)) continue;
 
-        Skimming::jet_sv_pt_b.push_back(jet_sv_pt->at(isv));
-        Skimming::jet_sv_pt_log_b.push_back(std::isnan(std::log(jet_sv_pt->at(isv))) ? 0 : std::log(jet_sv_pt->at(isv)));
-        Skimming::jet_sv_eta_b.push_back(jet_sv_eta->at(isv));
-        Skimming::jet_sv_abseta_b.push_back(abs(jet_sv_eta->at(isv)));
-        Skimming::jet_sv_phi_b.push_back(jet_sv_phi->at(isv));
-        Skimming::jet_sv_energy_b.push_back(jet_sv_energy->at(isv));
-        Skimming::jet_sv_energy_log_b.push_back(std::isnan(std::log(jet_sv_energy->at(isv))) ? 0 : std::log(jet_sv_energy->at(isv)));
-        Skimming::jet_sv_mass_b.push_back(jet_sv_mass->at(isv));
-        Skimming::jet_sv_deta_b.push_back(jet_sv_eta->at(isv)-jet_eta->at(ijet));
-        Skimming::jet_sv_dphi_b.push_back(jet_sv_phi->at(isv)-jet_phi->at(ijet));
-        Skimming::jet_sv_chi2_b.push_back(jet_sv_chi2->at(isv));
-        Skimming::jet_sv_dxy_b.push_back(std::isnan(jet_sv_dxy->at(isv)) ? 0 : jet_sv_dxy->at(isv));
-        Skimming::jet_sv_dxysig_b.push_back(std::isnan(jet_sv_dxysig->at(isv)) ? 0 : jet_sv_dxysig->at(isv));
-        Skimming::jet_sv_d3d_b.push_back(std::isnan(jet_sv_d3d->at(isv)) ? 0 : jet_sv_d3d->at(isv));
-        Skimming::jet_sv_d3dsig_b.push_back(std::isnan(jet_sv_d3dsig->at(isv)) ? 0 : jet_sv_d3dsig->at(isv));
-        Skimming::jet_sv_ntrack_b.push_back(jet_sv_ntrack->at(isv));
+        Skimming::jet_sv_pt_b.push_back(jetAK8_sv_pt->at(isv));
+        Skimming::jet_sv_pt_log_b.push_back(std::isnan(std::log(jetAK8_sv_pt->at(isv))) ? 0 : std::log(jetAK8_sv_pt->at(isv)));
+        Skimming::jet_sv_eta_b.push_back(jetAK8_sv_eta->at(isv));
+        Skimming::jet_sv_abseta_b.push_back(abs(jetAK8_sv_eta->at(isv)));
+        Skimming::jet_sv_phi_b.push_back(jetAK8_sv_phi->at(isv));
+        Skimming::jet_sv_energy_b.push_back(jetAK8_sv_energy->at(isv));
+        Skimming::jet_sv_energy_log_b.push_back(std::isnan(std::log(jetAK8_sv_energy->at(isv))) ? 0 : std::log(jetAK8_sv_energy->at(isv)));
+        Skimming::jet_sv_mass_b.push_back(jetAK8_sv_mass->at(isv));
+        Skimming::jet_sv_deta_b.push_back(jetAK8_sv_eta->at(isv)-jetAK8_eta->at(ijet));
+        Skimming::jet_sv_dphi_b.push_back(jetAK8_sv_phi->at(isv)-jetAK8_phi->at(ijet));
+        Skimming::jet_sv_chi2_b.push_back(jetAK8_sv_chi2->at(isv));
+        Skimming::jet_sv_dxy_b.push_back(std::isnan(jetAK8_sv_dxy->at(isv)) ? 0 : jetAK8_sv_dxy->at(isv));
+        Skimming::jet_sv_dxysig_b.push_back(std::isnan(jetAK8_sv_dxysig->at(isv)) ? 0 : jetAK8_sv_dxysig->at(isv));
+        Skimming::jet_sv_d3d_b.push_back(std::isnan(jetAK8_sv_d3d->at(isv)) ? 0 : jetAK8_sv_d3d->at(isv));
+        Skimming::jet_sv_d3dsig_b.push_back(std::isnan(jetAK8_sv_d3dsig->at(isv)) ? 0 : jetAK8_sv_d3dsig->at(isv));
+        Skimming::jet_sv_ntrack_b.push_back(jetAK8_sv_ntrack->at(isv));
 
         if( Skimming::jet_sv_pt_b.size() == sv_lenght ) break;
       }
@@ -579,128 +579,128 @@ void HEPHero::SkimmingSelection() {
       TLorentzVector tau4V_fromPF;
       TLorentzVector tau4V_boosted_fromPF;
 
-      vector<int> jet_pfcand_idx(jet_pfcand_pt->size());
+      vector<int> jetAK8_pfcand_idx(jetAK8_pfcand_pt->size());
       // initializing using iota()
-      iota(jet_pfcand_idx.begin(), jet_pfcand_idx.end(), 0);
-      sort(jet_pfcand_idx.begin(), jet_pfcand_idx.end(), [&](int A, int B) -> bool {
-        return jet_pfcand_pt->at(A) > jet_pfcand_pt->at(B);
+      iota(jetAK8_pfcand_idx.begin(), jetAK8_pfcand_idx.end(), 0);
+      sort(jetAK8_pfcand_idx.begin(), jetAK8_pfcand_idx.end(), [&](int A, int B) -> bool {
+        return jetAK8_pfcand_pt->at(A) > jetAK8_pfcand_pt->at(B);
       });
 
       //cout << "New jet ===================================================" << endl;
-      for(size_t idx = 0; idx < jet_pfcand_idx.size(); idx++){
-        int icand = jet_pfcand_idx.at(idx);
-        //cout << "jet_pfcand_pt: " << jet_pfcand_pt->at(icand) << endl;
-        if(ijet != jet_pfcand_ijet->at(icand)) continue;
-        if(jet_pfcand_pt->at(icand) < pfCandPtMin) continue;
-        if(jet_pfcand_puppiw->at(icand) < pfCandPuppiWeightMin) continue;
+      for(size_t idx = 0; idx < jetAK8_pfcand_idx.size(); idx++){
+        int icand = jetAK8_pfcand_idx.at(idx);
+        //cout << "jetAK8_pfcand_pt: " << jetAK8_pfcand_pt->at(icand) << endl;
+        if(ijet != jetAK8_pfcand_ijet->at(icand)) continue;
+        if(jetAK8_pfcand_pt->at(icand) < pfCandPtMin) continue;
+        if(jetAK8_pfcand_puppiw->at(icand) < pfCandPuppiWeightMin) continue;
 
-        Skimming::jet_pfcand_pt_b.push_back(jet_pfcand_pt->at(icand));
-        Skimming::jet_pfcand_pt_log_b.push_back(std::isnan(std::log(jet_pfcand_pt->at(icand))) ? 0 : std::log(jet_pfcand_pt->at(icand)));
-        Skimming::jet_pfcand_eta_b.push_back(jet_pfcand_eta->at(icand));
-        Skimming::jet_pfcand_abseta_b.push_back(abs(jet_pfcand_eta->at(icand)));
-        Skimming::jet_pfcand_phi_b.push_back(jet_pfcand_phi->at(icand));
-        Skimming::jet_pfcand_mass_b.push_back(jet_pfcand_mass->at(icand));
-        Skimming::jet_pfcand_energy_b.push_back(jet_pfcand_energy->at(icand));
-        Skimming::jet_pfcand_energy_log_b.push_back(std::isnan(std::log(jet_pfcand_energy->at(icand))) ? 0 : std::log(jet_pfcand_energy->at(icand)));
-        Skimming::jet_pfcand_calofraction_b.push_back(std::isnan(jet_pfcand_calofraction->at(icand)) ? 0 : jet_pfcand_calofraction->at(icand));
-        Skimming::jet_pfcand_hcalfraction_b.push_back(std::isnan(jet_pfcand_hcalfraction->at(icand)) ? 0 : jet_pfcand_hcalfraction->at(icand));
-        Skimming::jet_pfcand_dxy_b.push_back(std::isnan(jet_pfcand_dxy->at(icand)) ? 0 : jet_pfcand_dxy->at(icand));
-        Skimming::jet_pfcand_dz_b.push_back(std::isnan(jet_pfcand_dz->at(icand)) ? 0 : jet_pfcand_dz->at(icand));
-        Skimming::jet_pfcand_dzsig_b.push_back(std::isnan(jet_pfcand_dzsig->at(icand)) ? 0 : jet_pfcand_dzsig->at(icand));
-        Skimming::jet_pfcand_dxysig_b.push_back(std::isnan(jet_pfcand_dxysig->at(icand)) ? 0 : jet_pfcand_dxysig->at(icand));
-        Skimming::jet_pfcand_pperp_ratio_b.push_back(std::isnan(jet_pfcand_pperp_ratio->at(icand)) ? 0 : jet_pfcand_pperp_ratio->at(icand));
-        Skimming::jet_pfcand_ppara_ratio_b.push_back(std::isnan(jet_pfcand_ppara_ratio->at(icand)) ? 0 : jet_pfcand_ppara_ratio->at(icand));
-        Skimming::jet_pfcand_deta_b.push_back(jet_pfcand_deta->at(icand));
-        Skimming::jet_pfcand_dphi_b.push_back(jet_pfcand_dphi->at(icand));
-        Skimming::jet_pfcand_etarel_b.push_back(std::isnan(jet_pfcand_etarel->at(icand)) ? 0 : jet_pfcand_etarel->at(icand));
-        Skimming::jet_pfcand_frompv_b.push_back(jet_pfcand_frompv->at(icand));
-        Skimming::jet_pfcand_charge_b.push_back(jet_pfcand_charge->at(icand));
-        Skimming::jet_pfcand_puppiw_b.push_back(jet_pfcand_puppiw->at(icand));
+        Skimming::jet_pfcand_pt_b.push_back(jetAK8_pfcand_pt->at(icand));
+        Skimming::jet_pfcand_pt_log_b.push_back(std::isnan(std::log(jetAK8_pfcand_pt->at(icand))) ? 0 : std::log(jetAK8_pfcand_pt->at(icand)));
+        Skimming::jet_pfcand_eta_b.push_back(jetAK8_pfcand_eta->at(icand));
+        Skimming::jet_pfcand_abseta_b.push_back(abs(jetAK8_pfcand_eta->at(icand)));
+        Skimming::jet_pfcand_phi_b.push_back(jetAK8_pfcand_phi->at(icand));
+        Skimming::jet_pfcand_mass_b.push_back(jetAK8_pfcand_mass->at(icand));
+        Skimming::jet_pfcand_energy_b.push_back(jetAK8_pfcand_energy->at(icand));
+        Skimming::jet_pfcand_energy_log_b.push_back(std::isnan(std::log(jetAK8_pfcand_energy->at(icand))) ? 0 : std::log(jetAK8_pfcand_energy->at(icand)));
+        Skimming::jet_pfcand_calofraction_b.push_back(std::isnan(jetAK8_pfcand_calofraction->at(icand)) ? 0 : jetAK8_pfcand_calofraction->at(icand));
+        Skimming::jet_pfcand_hcalfraction_b.push_back(std::isnan(jetAK8_pfcand_hcalfraction->at(icand)) ? 0 : jetAK8_pfcand_hcalfraction->at(icand));
+        Skimming::jet_pfcand_dxy_b.push_back(std::isnan(jetAK8_pfcand_dxy->at(icand)) ? 0 : jetAK8_pfcand_dxy->at(icand));
+        Skimming::jet_pfcand_dz_b.push_back(std::isnan(jetAK8_pfcand_dz->at(icand)) ? 0 : jetAK8_pfcand_dz->at(icand));
+        Skimming::jet_pfcand_dzsig_b.push_back(std::isnan(jetAK8_pfcand_dzsig->at(icand)) ? 0 : jetAK8_pfcand_dzsig->at(icand));
+        Skimming::jet_pfcand_dxysig_b.push_back(std::isnan(jetAK8_pfcand_dxysig->at(icand)) ? 0 : jetAK8_pfcand_dxysig->at(icand));
+        Skimming::jet_pfcand_pperp_ratio_b.push_back(std::isnan(jetAK8_pfcand_pperp_ratio->at(icand)) ? 0 : jetAK8_pfcand_pperp_ratio->at(icand));
+        Skimming::jet_pfcand_ppara_ratio_b.push_back(std::isnan(jetAK8_pfcand_ppara_ratio->at(icand)) ? 0 : jetAK8_pfcand_ppara_ratio->at(icand));
+        Skimming::jet_pfcand_deta_b.push_back(jetAK8_pfcand_deta->at(icand));
+        Skimming::jet_pfcand_dphi_b.push_back(jetAK8_pfcand_dphi->at(icand));
+        Skimming::jet_pfcand_etarel_b.push_back(std::isnan(jetAK8_pfcand_etarel->at(icand)) ? 0 : jetAK8_pfcand_etarel->at(icand));
+        Skimming::jet_pfcand_frompv_b.push_back(jetAK8_pfcand_frompv->at(icand));
+        Skimming::jet_pfcand_charge_b.push_back(jetAK8_pfcand_charge->at(icand));
+        Skimming::jet_pfcand_puppiw_b.push_back(jetAK8_pfcand_puppiw->at(icand));
 
-        Skimming::jet_pfcand_track_qual_b.push_back(jet_pfcand_track_qual->at(icand));
-        Skimming::jet_pfcand_track_chi2_b.push_back(jet_pfcand_track_chi2->at(icand));
-        Skimming::jet_pfcand_track_algo_b.push_back(jet_pfcand_track_algo->at(icand));
-        Skimming::jet_pfcand_track_pterr_b.push_back((std::isnan(jet_pfcand_track_pterr->at(icand)) ? 0 : jet_pfcand_track_pterr->at(icand)));
-        Skimming::jet_pfcand_track_etaerr_b.push_back((std::isnan(jet_pfcand_track_etaerr->at(icand)) ? 0 : jet_pfcand_track_etaerr->at(icand)));
-        Skimming::jet_pfcand_track_phierr_b.push_back((std::isnan(jet_pfcand_track_phierr->at(icand)) ? 0 : jet_pfcand_track_phierr->at(icand)));
-        Skimming::jet_pfcand_nhits_b.push_back(jet_pfcand_nhits->at(icand));
-        Skimming::jet_pfcand_npixhits_b.push_back(jet_pfcand_npixhits->at(icand));
-        Skimming::jet_pfcand_nstriphits_b.push_back(jet_pfcand_nstriphits->at(icand));
-        Skimming::jet_pfcand_nlosthits_b.push_back(jet_pfcand_nlosthits->at(icand));
-        Skimming::jet_pfcand_npixlayers_b.push_back(jet_pfcand_npixlayers->at(icand));
-        Skimming::jet_pfcand_nstriplayers_b.push_back(jet_pfcand_nstriplayers->at(icand));
+        Skimming::jet_pfcand_track_qual_b.push_back(jetAK8_pfcand_track_qual->at(icand));
+        Skimming::jet_pfcand_track_chi2_b.push_back(jetAK8_pfcand_track_chi2->at(icand));
+        Skimming::jet_pfcand_track_algo_b.push_back(jetAK8_pfcand_track_algo->at(icand));
+        Skimming::jet_pfcand_track_pterr_b.push_back((std::isnan(jetAK8_pfcand_track_pterr->at(icand)) ? 0 : jetAK8_pfcand_track_pterr->at(icand)));
+        Skimming::jet_pfcand_track_etaerr_b.push_back((std::isnan(jetAK8_pfcand_track_etaerr->at(icand)) ? 0 : jetAK8_pfcand_track_etaerr->at(icand)));
+        Skimming::jet_pfcand_track_phierr_b.push_back((std::isnan(jetAK8_pfcand_track_phierr->at(icand)) ? 0 : jetAK8_pfcand_track_phierr->at(icand)));
+        Skimming::jet_pfcand_nhits_b.push_back(jetAK8_pfcand_nhits->at(icand));
+        Skimming::jet_pfcand_npixhits_b.push_back(jetAK8_pfcand_npixhits->at(icand));
+        Skimming::jet_pfcand_nstriphits_b.push_back(jetAK8_pfcand_nstriphits->at(icand));
+        Skimming::jet_pfcand_nlosthits_b.push_back(jetAK8_pfcand_nlosthits->at(icand));
+        Skimming::jet_pfcand_npixlayers_b.push_back(jetAK8_pfcand_npixlayers->at(icand));
+        Skimming::jet_pfcand_nstriplayers_b.push_back(jetAK8_pfcand_nstriplayers->at(icand));
 
-        if(jet_pfcand_id->at(icand) == 11 and jet_pfcand_charge->at(icand) != 0)
+        if(jetAK8_pfcand_id->at(icand) == 11 and jetAK8_pfcand_charge->at(icand) != 0)
           Skimming::jet_pfcand_id_b.push_back(0);
-        else if(jet_pfcand_id->at(icand) == 13 and jet_pfcand_charge->at(icand) != 0)
+        else if(jetAK8_pfcand_id->at(icand) == 13 and jetAK8_pfcand_charge->at(icand) != 0)
           Skimming::jet_pfcand_id_b.push_back(1);
-        else if(jet_pfcand_id->at(icand) == 22 and jet_pfcand_charge->at(icand) == 0)
+        else if(jetAK8_pfcand_id->at(icand) == 22 and jetAK8_pfcand_charge->at(icand) == 0)
           Skimming::jet_pfcand_id_b.push_back(2);
-        else if(jet_pfcand_id->at(icand) != 22 and jet_pfcand_charge->at(icand) == 0 and jet_pfcand_id->at(icand) != 1 and jet_pfcand_id->at(icand) != 2)
+        else if(jetAK8_pfcand_id->at(icand) != 22 and jetAK8_pfcand_charge->at(icand) == 0 and jetAK8_pfcand_id->at(icand) != 1 and jetAK8_pfcand_id->at(icand) != 2)
           Skimming::jet_pfcand_id_b.push_back(3);
-        else if(jet_pfcand_id->at(icand) != 11 and jet_pfcand_id->at(icand) != 13 and jet_pfcand_charge->at(icand) != 0)
+        else if(jetAK8_pfcand_id->at(icand) != 11 and jetAK8_pfcand_id->at(icand) != 13 and jetAK8_pfcand_charge->at(icand) != 0)
           Skimming::jet_pfcand_id_b.push_back(4);
-        else if(jet_pfcand_charge->at(icand) == 0  and jet_pfcand_id->at(icand) == 1)
+        else if(jetAK8_pfcand_charge->at(icand) == 0  and jetAK8_pfcand_id->at(icand) == 1)
           Skimming::jet_pfcand_id_b.push_back(5);
-        else if(jet_pfcand_charge->at(icand) == 0  and jet_pfcand_id->at(icand) == 2)
+        else if(jetAK8_pfcand_charge->at(icand) == 0  and jetAK8_pfcand_id->at(icand) == 2)
           Skimming::jet_pfcand_id_b.push_back(6);
         else
           Skimming::jet_pfcand_id_b.push_back(-1);
 
-        Skimming::jet_pfcand_trackjet_d3d_b.push_back(std::isnan(jet_pfcand_trackjet_d3d->at(icand)) ? 0 : jet_pfcand_trackjet_d3d->at(icand));
-        Skimming::jet_pfcand_trackjet_d3dsig_b.push_back(std::isnan(jet_pfcand_trackjet_d3dsig->at(icand)) ? 0 : jet_pfcand_trackjet_d3dsig->at(icand));
-        Skimming::jet_pfcand_trackjet_dist_b.push_back(std::isnan(jet_pfcand_trackjet_dist->at(icand)) ? 0 : jet_pfcand_trackjet_dist->at(icand));
-        Skimming::jet_pfcand_trackjet_decayL_b.push_back(std::isnan(jet_pfcand_trackjet_decayL->at(icand)) ? 0 : jet_pfcand_trackjet_decayL->at(icand));
+        Skimming::jet_pfcand_trackjet_d3d_b.push_back(std::isnan(jetAK8_pfcand_trackjet_d3d->at(icand)) ? 0 : jetAK8_pfcand_trackjet_d3d->at(icand));
+        Skimming::jet_pfcand_trackjet_d3dsig_b.push_back(std::isnan(jetAK8_pfcand_trackjet_d3dsig->at(icand)) ? 0 : jetAK8_pfcand_trackjet_d3dsig->at(icand));
+        Skimming::jet_pfcand_trackjet_dist_b.push_back(std::isnan(jetAK8_pfcand_trackjet_dist->at(icand)) ? 0 : jetAK8_pfcand_trackjet_dist->at(icand));
+        Skimming::jet_pfcand_trackjet_decayL_b.push_back(std::isnan(jetAK8_pfcand_trackjet_decayL->at(icand)) ? 0 : jetAK8_pfcand_trackjet_decayL->at(icand));
 
-        Skimming::jet_pfcand_tau_signal_b.push_back(jet_pfcand_tau_signal->at(icand));
-        Skimming::jet_pfcand_tau_boosted_signal_b.push_back(jet_pfcand_tau_boosted_signal->at(icand));
+        Skimming::jet_pfcand_tau_signal_b.push_back(jetAK8_pfcand_tau_signal->at(icand));
+        Skimming::jet_pfcand_tau_boosted_signal_b.push_back(jetAK8_pfcand_tau_boosted_signal->at(icand));
 
-        Skimming::jet_pfcand_muon_id_b.push_back(jet_pfcand_muon_id->at(icand));
-        Skimming::jet_pfcand_muon_chi2_b.push_back(jet_pfcand_muon_chi2->at(icand));
-        Skimming::jet_pfcand_muon_segcomp_b.push_back(jet_pfcand_muon_segcomp->at(icand));
-        Skimming::jet_pfcand_muon_isglobal_b.push_back(jet_pfcand_muon_isglobal->at(icand));
-        Skimming::jet_pfcand_muon_nvalidhit_b.push_back(jet_pfcand_muon_nvalidhit->at(icand));
-        Skimming::jet_pfcand_muon_nstation_b.push_back(jet_pfcand_muon_nstation->at(icand));
+        Skimming::jet_pfcand_muon_id_b.push_back(jetAK8_pfcand_muon_id->at(icand));
+        Skimming::jet_pfcand_muon_chi2_b.push_back(jetAK8_pfcand_muon_chi2->at(icand));
+        Skimming::jet_pfcand_muon_segcomp_b.push_back(jetAK8_pfcand_muon_segcomp->at(icand));
+        Skimming::jet_pfcand_muon_isglobal_b.push_back(jetAK8_pfcand_muon_isglobal->at(icand));
+        Skimming::jet_pfcand_muon_nvalidhit_b.push_back(jetAK8_pfcand_muon_nvalidhit->at(icand));
+        Skimming::jet_pfcand_muon_nstation_b.push_back(jetAK8_pfcand_muon_nstation->at(icand));
 
-        Skimming::jet_pfcand_electron_eOverP_b.push_back(std::isnan(jet_pfcand_electron_eOverP->at(icand)) ? 0 : jet_pfcand_electron_eOverP->at(icand));
-        Skimming::jet_pfcand_electron_detaIn_b.push_back(jet_pfcand_electron_detaIn->at(icand));
-        Skimming::jet_pfcand_electron_dphiIn_b.push_back(jet_pfcand_electron_dphiIn->at(icand));
-        Skimming::jet_pfcand_electron_r9_b.push_back(std::isnan(jet_pfcand_electron_r9->at(icand)) ? 0 : jet_pfcand_electron_r9->at(icand));
-        Skimming::jet_pfcand_electron_sigIetaIeta_b.push_back(jet_pfcand_electron_sigIetaIeta->at(icand));
-        Skimming::jet_pfcand_electron_convProb_b.push_back(std::isnan(jet_pfcand_electron_convProb->at(icand)) ? 0 : jet_pfcand_electron_convProb->at(icand));
-        Skimming::jet_pfcand_electron_sigIphiIphi_b.push_back(std::isnan(jet_pfcand_electron_sigIphiIphi->at(icand)) ? 0 : jet_pfcand_electron_sigIphiIphi->at(icand));
+        Skimming::jet_pfcand_electron_eOverP_b.push_back(std::isnan(jetAK8_pfcand_electron_eOverP->at(icand)) ? 0 : jetAK8_pfcand_electron_eOverP->at(icand));
+        Skimming::jet_pfcand_electron_detaIn_b.push_back(jetAK8_pfcand_electron_detaIn->at(icand));
+        Skimming::jet_pfcand_electron_dphiIn_b.push_back(jetAK8_pfcand_electron_dphiIn->at(icand));
+        Skimming::jet_pfcand_electron_r9_b.push_back(std::isnan(jetAK8_pfcand_electron_r9->at(icand)) ? 0 : jetAK8_pfcand_electron_r9->at(icand));
+        Skimming::jet_pfcand_electron_sigIetaIeta_b.push_back(jetAK8_pfcand_electron_sigIetaIeta->at(icand));
+        Skimming::jet_pfcand_electron_convProb_b.push_back(std::isnan(jetAK8_pfcand_electron_convProb->at(icand)) ? 0 : jetAK8_pfcand_electron_convProb->at(icand));
+        Skimming::jet_pfcand_electron_sigIphiIphi_b.push_back(std::isnan(jetAK8_pfcand_electron_sigIphiIphi->at(icand)) ? 0 : jetAK8_pfcand_electron_sigIphiIphi->at(icand));
 
-        Skimming::jet_pfcand_photon_sigIetaIeta_b.push_back(std::isnan(jet_pfcand_photon_sigIetaIeta->at(icand)) ? 0 : jet_pfcand_photon_sigIetaIeta->at(icand));
-        Skimming::jet_pfcand_photon_r9_b.push_back(std::isnan(jet_pfcand_photon_r9->at(icand)) ? 0 : jet_pfcand_photon_r9->at(icand));
-        Skimming::jet_pfcand_photon_eVeto_b.push_back(std::isnan(jet_pfcand_photon_eVeto->at(icand)) ? 0 : jet_pfcand_photon_eVeto->at(icand));
+        Skimming::jet_pfcand_photon_sigIetaIeta_b.push_back(std::isnan(jetAK8_pfcand_photon_sigIetaIeta->at(icand)) ? 0 : jetAK8_pfcand_photon_sigIetaIeta->at(icand));
+        Skimming::jet_pfcand_photon_r9_b.push_back(std::isnan(jetAK8_pfcand_photon_r9->at(icand)) ? 0 : jetAK8_pfcand_photon_r9->at(icand));
+        Skimming::jet_pfcand_photon_eVeto_b.push_back(std::isnan(jetAK8_pfcand_photon_eVeto->at(icand)) ? 0 : jetAK8_pfcand_photon_eVeto->at(icand));
 
         // take muons
-        if(jet_pfcand_id->at(icand) == 11){
+        if(jetAK8_pfcand_id->at(icand) == 11){
           TLorentzVector tmp4V;
-          tmp4V.SetPtEtaPhiM(jet_pfcand_pt->at(icand),jet_pfcand_eta->at(icand),jet_pfcand_phi->at(icand),jet_pfcand_mass->at(icand));
+          tmp4V.SetPtEtaPhiM(jetAK8_pfcand_pt->at(icand),jetAK8_pfcand_eta->at(icand),jetAK8_pfcand_phi->at(icand),jetAK8_pfcand_mass->at(icand));
           electron4V_fromPF.push_back(tmp4V);
         }
         // take electrons
-        if(jet_pfcand_id->at(icand) == 13){
+        if(jetAK8_pfcand_id->at(icand) == 13){
           TLorentzVector tmp4V;
-          tmp4V.SetPtEtaPhiM(jet_pfcand_pt->at(icand),jet_pfcand_eta->at(icand),jet_pfcand_phi->at(icand),jet_pfcand_mass->at(icand));
+          tmp4V.SetPtEtaPhiM(jetAK8_pfcand_pt->at(icand),jetAK8_pfcand_eta->at(icand),jetAK8_pfcand_phi->at(icand),jetAK8_pfcand_mass->at(icand));
           muon4V_fromPF.push_back(tmp4V);
         }
         // take photons
-        if(jet_pfcand_id->at(icand) == 22){
+        if(jetAK8_pfcand_id->at(icand) == 22){
           TLorentzVector tmp4V;
-          tmp4V.SetPtEtaPhiM(jet_pfcand_pt->at(icand),jet_pfcand_eta->at(icand),jet_pfcand_phi->at(icand),jet_pfcand_mass->at(icand));
+          tmp4V.SetPtEtaPhiM(jetAK8_pfcand_pt->at(icand),jetAK8_pfcand_eta->at(icand),jetAK8_pfcand_phi->at(icand),jetAK8_pfcand_mass->at(icand));
           photon4V_fromPF.push_back(tmp4V);
         }
         // take every tau candidate
-        if(jet_pfcand_tau_signal->at(icand)){
+        if(jetAK8_pfcand_tau_signal->at(icand)){
           TLorentzVector tmp4V;
-          tmp4V.SetPtEtaPhiM(jet_pfcand_pt->at(icand),jet_pfcand_eta->at(icand),jet_pfcand_phi->at(icand),jet_pfcand_mass->at(icand));
+          tmp4V.SetPtEtaPhiM(jetAK8_pfcand_pt->at(icand),jetAK8_pfcand_eta->at(icand),jetAK8_pfcand_phi->at(icand),jetAK8_pfcand_mass->at(icand));
           tau4V_fromPF += tmp4V;
         }
-        if(jet_pfcand_tau_boosted_signal->at(icand)){
+        if(jetAK8_pfcand_tau_boosted_signal->at(icand)){
           TLorentzVector tmp4V;
-          tmp4V.SetPtEtaPhiM(jet_pfcand_pt->at(icand),jet_pfcand_eta->at(icand),jet_pfcand_phi->at(icand),jet_pfcand_mass->at(icand));
+          tmp4V.SetPtEtaPhiM(jetAK8_pfcand_pt->at(icand),jetAK8_pfcand_eta->at(icand),jetAK8_pfcand_phi->at(icand),jetAK8_pfcand_mass->at(icand));
           tau4V_boosted_fromPF += tmp4V;
         }
 
