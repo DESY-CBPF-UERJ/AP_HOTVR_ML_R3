@@ -5,7 +5,6 @@
 #include "CMS.h"
 #include "ML.h"
 #include "onnxruntime_cxx_api.h"
-#include "onnx_model.h"
 
 
 using namespace std;
@@ -22,17 +21,17 @@ class HEPHero : public HEPBase {
     private:
         static HEPHero* _instance;
 
-        bool RunRoutines();
-        void PreRoutines();
-        
         HEPHero() {}
         HEPHero( char* configFileName );
 
+        bool RunRoutines();
+        void PreRoutines();
+        bool MC_processing();
+        void Weight_corrections();
         void FillControlVariables( string key, string value);
         void VerticalSysSizes();
         void VerticalSys();
-        void Weight_corrections();
-        bool MC_processing();
+
         void SetupAna();
         bool AnaRegion();
         void AnaSelection();

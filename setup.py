@@ -40,9 +40,9 @@ periods = [
 ]
 
 datasets = [
-"TTtoLNu2Q_HOTVR",
-"Zto2Q_HOTVR",
-"QCD_HOTVR",
+"TTtoLNu2Q",
+"Zto2Q",
+"QCD",
 ]
 
 
